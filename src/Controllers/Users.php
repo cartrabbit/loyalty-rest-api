@@ -17,13 +17,17 @@ class Users extends \WP_REST_Controller {
     {
         register_rest_route($this->namespace, '/' . $this->rest_base.'/(?P<id>[\d]+)', array(
             array(
-                'methods' => \WP_REST_Server::READABLE,
-                'callback' => array($this, 'AddPoint'),
-            ),
-            array(
-                'methods' => \WP_REST_Server::CREATABLE,
-                'callback' => array($this, 'ReducePoint'),
+                'methods' => \WP_REST_Server::EDITABLE,
+                'callback' => array($this, 'UpdatePoint'),
             )
         ));
+    }
+
+    function UpdatePoint($request){
+        $response = array(
+            'id' => 3,
+            'name' => 'alex'
+        );
+        return rest_ensure_response( $response );
     }
 }
